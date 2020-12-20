@@ -4,6 +4,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 // Converts a Jwt into a collection of Granted Authorities
+@Component
 public class KeycloakRoleConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
 
     @Override
@@ -38,6 +40,7 @@ public class KeycloakRoleConverter implements Converter<Jwt, Collection<GrantedA
         // - uma_authorization
         List<String> roleList = (List<String>) realmAccess.get("roles");
 
+        // Result is a collection of new SimpleGrantedAuthority("ROLE_" + roleName);
         Collection<GrantedAuthority> returnValue = roleList.stream()
                 .map(roleName -> "ROLE_" + roleName)
                 .map(SimpleGrantedAuthority::new)
