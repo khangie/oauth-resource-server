@@ -12,7 +12,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/users/status/check")
-                .hasAuthority("SCOPE_profile") // Continue to check JWT token only if endpoint and profile scope matches.  The prefix "SCOPE_" is default and "profile" is a standard scope.
+//                .hasAuthority("SCOPE_profile") // Continue to check JWT token only if endpoint and profile scope matches.  The prefix "SCOPE_" is default and "profile" is a standard scope.
+                .hasRole("developer")
                 .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer()
