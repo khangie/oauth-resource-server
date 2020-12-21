@@ -2,12 +2,14 @@ package com.appsdeveloperblog.ws.api.ResourceServer.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 
-@EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled = true) // Allows for class level and method level annotations such as @PreAuthorize and @Secured
+@EnableWebSecurity // Similar to @Configuration annotation for resource server
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
